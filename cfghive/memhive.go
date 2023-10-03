@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// A hive that is memory resident.
+// MemHive A hive that is memory resident.
 type MemHive struct {
 	// The root hive.
 	data       map[string]interface{}
@@ -14,30 +14,29 @@ type MemHive struct {
 	inMemory   bool
 }
 
-// Creates a new file hive.
+// NewMemHive Creates a new file hive.
 func NewMemHive() (*MemHive, error) {
 	h := &MemHive{hasChanges: false, inMemory: true}
 	h.data = make(map[string]interface{})
 	return h, nil
 }
 
-// Gets the characteristics of the hive.
+// Characteristics Gets the characteristics of the hive.
 func (h *MemHive) Characteristics() HiveCharacteristics {
 	return HiveCharacteristics{false, false, false}
 }
 
-// Loads the hive from the file.
+// Load Loads the hive from the file.
 // the file is a JSON file.
 func (h *MemHive) Load() error {
 	return errors.New("not implemented")
 }
 
 func (h *MemHive) Get(key string) (interface{}, error) {
-	path := strings.Split(key, "/")
-	if len(path) < 1 {
+	if key == "" {
 		return nil, errors.New("a key must have at least one path element")
-
 	}
+	path := strings.Split(key, "/")
 	search := h.data
 	for i, pf := range path {
 		if i == len(path)-1 {
@@ -56,10 +55,10 @@ func (h *MemHive) Get(key string) (interface{}, error) {
 }
 
 func (h *MemHive) Set(key string, value interface{}) error {
-	path := strings.Split(key, "/")
-	if len(path) < 1 {
+	if key == "" {
 		return errors.New("a key must have at least one path element")
 	}
+	path := strings.Split(key, "/")
 	search := h.data
 	for i, pf := range path {
 		if i == len(path)-1 {

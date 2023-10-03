@@ -43,6 +43,14 @@ func TestSet(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	err = h.Set("fez/baz/zaz", "bar")
+	if err == nil {
+		t.Fatal("No error when setting a value in a non-existent sub-hive")
+	}
+	err = h.Set("", nil)
+	if err == nil {
+		t.Fatal("No error with empty key")
+	}
 }
 
 func TestGet(t *testing.T) {
@@ -66,5 +74,25 @@ func TestGet(t *testing.T) {
 	}
 	if v.(string) != "bar" {
 		t.Fatal("v is not bar")
+	}
+	h.NewSub("fez")
+	err = h.Set("fez/baz", "bar")
+	if err != nil {
+		t.Fatal(err)
+	}
+	v, err = h.Get("fez/baz")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if v == nil {
+		t.Fatal("v is nil")
+	}
+	_, err = h.Get("fez/baz/zaz")
+	if err == nil {
+		t.Fatal("No error when setting a value in a non-existent sub-hive")
+	}
+	_, err = h.Get("")
+	if err == nil {
+		t.Fatal("No error with empty key")
 	}
 }
