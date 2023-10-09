@@ -1,4 +1,5 @@
 go 1.21.1
 
 use ./cfghive
-use ./cmd
+use ./cfghive/cmd
+use ./api

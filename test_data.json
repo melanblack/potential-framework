@@ -1,0 +1,15 @@
+{
+	"productParams": {
+		"channel": "DESKTOP-RELEASE",
+		"support": "LTS",
+		"productSku": "UBUNTU",
+		"productVersion": "23.04",
+		"productName": "Ubuntu Desktop 23.04 LTS",
+		"skuNum": 100
+	},
+	"license": {
+		"licensee": "John Doe",
+		"company": "Acme Inc.",
+		"licenseId": "2fae3c4d-5b6f-4a7d-8c3a-9b1a2b3c4d5e"
+	}
+}
